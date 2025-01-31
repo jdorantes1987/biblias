@@ -12,7 +12,7 @@ class BD_SQLite_Biblias(IDataSource):
 
     def get_biblia_BLPH(self):
         sql = """
-                SELECT b.long_name, b.short_name, v.chapter, v.verse, v.text
+                SELECT b.short_name, v.chapter, v.verse, v.text
                 FROM verses AS v LEFT JOIN books AS b ON v.book_number = b.book_number
             """
         return read_sql(sql, self.conexion)
