@@ -1,5 +1,3 @@
-from sqlite3 import IntegrityError
-
 from pandas import read_sql
 
 from scripts.interfaz_data_source import IDataSource
