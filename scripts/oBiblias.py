@@ -11,14 +11,14 @@ class DataBiblias:
     def __init__(self, p_biblia) -> None:
         self.data = DB(connect(p_biblia))
 
-    def get_biblia_BLPH(self):
-        return self.data.get_biblia_BLPH()
+    def get_biblia(self):
+        return self.data.get_biblia()
 
 
 if __name__ == "__main__":
     data = DataBiblias(p_biblia=p_RVA)
-    df = data.get_biblia_BLPH()
-    palabras = ["propia bondad", "propia justicia", "propia sabiduría"]
+    df = data.get_biblia()
+    palabras = ["Abram"]
     df = df[df["text"].str.contains("|".join(palabras), regex=True)]
     df["text"] = df["text"].str[:140]
     print(df.to_string(index=False))
