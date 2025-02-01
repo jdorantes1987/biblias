@@ -1,4 +1,6 @@
+import re
 from sqlite3 import connect
+import pprint
 
 from scripts.db_sqlite import BD_SQLite_Biblias as DB
 
@@ -18,9 +20,15 @@ if __name__ == "__main__":
     )
     p_RVA = r"F:\Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/RVA/RVA.SQLite3"
 
-    data = DataBiblias(p_biblia=p_RVA)
+    data = DataBiblias(p_biblia=p_BLPH)
     df = data.get_biblia()
-    palabras = ["Jesucristo"]
-    df = df[df["text"].str.contains("|".join(palabras), regex=True)]
-    df["text"] = df["text"].str[:140]
-    print(df.to_string(index=False))
+    palabras = ["noventa y nueve"]
+    df = df[df["text"].str.contains(r"\b" + "|".join(palabras) + r"\b", regex=True)]
+    df["text"] = df["text"]
+    # df.to_excel("RVA.xlsx", index=False)
+    pprint.pprint(
+        df.to_string(),
+        indent=4,
+        width=100,
+        compact=True,
+    )
