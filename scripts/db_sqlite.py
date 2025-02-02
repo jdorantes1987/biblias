@@ -10,7 +10,14 @@ class BD_SQLite_Biblias(IDataSource):
 
     def get_biblia(self):
         sql = """
-                SELECT v.book_number, b.short_name, v.chapter, v.verse, v.text
+                SELECT v.book_number, b.long_name, v.chapter, v.verse, v.text
                 FROM verses AS v LEFT JOIN books AS b ON v.book_number = b.book_number
+            """
+        return read_sql(sql, self.conexion)
+
+    def get_info_biblia(self):
+        sql = """
+                SELECT *
+                FROM info
             """
         return read_sql(sql, self.conexion)
