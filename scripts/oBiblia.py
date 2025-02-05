@@ -32,9 +32,4 @@ if __name__ == "__main__":
     palabras = ["glotón", "comilón", "comilona", "comilones", "comilonas", "gula"]
     df = df[df["text"].str.contains(r"\b" + "|".join(palabras) + r"\b", regex=True)]
     df["text"] = df["text"]
-    pprint.pprint(
-        df.to_string(),
-        indent=4,
-        width=100,
-        compact=True,
-    )
+    pprint.pprint(df.to_dict("records"), indent=4, width=130, compact=True, depth=2)

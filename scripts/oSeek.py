@@ -24,12 +24,14 @@ if __name__ == "__main__":
     )
     p_RVA = r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/RVA/RVA.SQLite3"
     seek = Seek([p_BLPH])
-    palabras = ["adversario"]
+    palabras = ["Téraj"]
     result = seek.search_words(palabras)
     for i, df in enumerate(result):
         pprint.pprint(
-            df.to_string(),
+            df.to_dict("records"),
             indent=4,
-            width=100,
+            width=130,
             compact=True,
+            depth=2,
+            sort_dicts=False,
         )
