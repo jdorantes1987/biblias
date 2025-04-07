@@ -1,12 +1,23 @@
 from sqlite3 import connect
 import pprint
 
-from scripts.db_sqlite import BD_SQLite_Biblias as DB
+from scripts.db_sqlite import BD_SQLite_Biblias
 
 
 class DataBiblia:
+    """
+    Una clase para interactuar con los datos bíblicos almacenados en una base de datos.
+    Atributos:
+        data (DB): Una instancia de la conexión a la base de datos inicializada con los datos de la Biblia proporcionados.
+    Métodos:
+        get_biblia():
+            Recupera los datos de la Biblia junto con la descripción de su versión.
+        get_info():
+            Recupera información adicional sobre la Biblia.
+    """
+
     def __init__(self, p_biblia) -> None:
-        self.data = DB(connect(p_biblia))
+        self.data = BD_SQLite_Biblias(connect(p_biblia))
 
     def get_biblia(self):
         data_biblia = self.data.get_biblia()  # Obtener la biblia
