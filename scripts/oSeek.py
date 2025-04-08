@@ -20,8 +20,11 @@ def execution_time(func):
 
 
 class Seek:
-    def __init__(self, versions) -> None:
-        self.data = [DataBiblia(biblia) for biblia in versions]
+    def __init__(self, is_remote, file_id, bible_version) -> None:
+        self.data = [
+            DataBiblia(is_remote=is_remote, file_id=file_id, path_db_biblia=biblia)
+            for biblia in bible_version
+        ]
 
     @execution_time
     def search_words(self, find_word):
@@ -35,14 +38,30 @@ class Seek:
 
 
 if __name__ == "__main__":
-    p_BLPH = r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/BLPH/BLPH.SQLite3"
-    p_NRV1990 = (
-        r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/NRV1990/NRV1990.SQLite3"
-    )
-    p_RVA = r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/RVA/RVA.SQLite3"
 
-    seek = Seek([p_BLPH])
-    palabras = ["otro mundo"]
+    p_BLPH = [
+        r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/BLPH/BLPH.SQLite3",
+        "1O7NQJBOeb-9IG0GI9kbKRbxw-YjnVmxR",
+    ]
+    p_NRV1990 = [
+        r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/NRV1990/NRV1990.SQLite3",
+        "1iJAd7pm85A6XgvseClpfHNOvuhdTC3bB",
+    ]
+    p_RVA = [
+        r"F:/Samsung/Personal/Estudios_Bbcs/Biblias Sqlite/RVA/RVA.SQLite3",
+        "1jiCnQkm0Gy_BmossfYKOKIUHDTSlISWg",
+    ]
+
+    seek = Seek(
+        is_remote=False,
+        file_id=p_RVA[1],
+        bible_version=[
+            p_NRV1990[0],
+            p_BLPH[0],
+        ],
+    )
+
+    palabras = ["ociosa"]
     result = seek.search_words(palabras)
     for i, df in enumerate(result):
         pprint.pprint(

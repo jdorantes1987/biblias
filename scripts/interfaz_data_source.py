@@ -19,5 +19,9 @@ class IDataSource(ABC):
     def get_biblia(self):
         pass
 
+    @abstractmethod
+    def get_biblia_remote(self):
+        pass
+
     def get_info_biblia(self):
         pass

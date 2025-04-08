@@ -56,3 +56,9 @@ class BD_SQLite_Biblias(IDataSource):
                 FROM info
             """
         return read_sql(sql, self.conexion)
+
+    def get_biblia_remote(self):
+        """
+        Este método no está implementado para esta clase.
+        """
+        raise NotImplementedError("Este método no está implementado para esta clase.")
