@@ -22,15 +22,20 @@ def execution_time(func):
 class Seek:
     def __init__(self, is_remote, file_id, bible_version) -> None:
         self.data = [
-            DataBiblia(is_remote=is_remote, file_id=file_id, path_db_biblia=biblia)
-            for biblia in bible_version
+            DataBiblia(
+                is_remote=is_remote,
+                file_id=file_id[i],
+                path_db_biblia=bible_version[i],
+            )
+            for i in range(len(file_id))
         ]
 
     @execution_time
     def search_words(self, find_word):
         pattern = r"\b" + "|".join(find_word) + r"\b"  # Crear el patrón de búsqueda
+        # Buscar las palabras en la biblia
         return [
-            biblia.get_biblia().loc[  # Buscar las palabras en la biblia
+            biblia.get_biblia().loc[
                 biblia.get_biblia()["text"].str.contains(pattern, regex=True)
             ]
             for biblia in self.data
@@ -53,15 +58,18 @@ if __name__ == "__main__":
     ]
 
     seek = Seek(
-        is_remote=False,
-        file_id=p_RVA[1],
+        is_remote=True,
+        file_id=[
+            p_NRV1990[1],
+            p_BLPH[1],
+        ],
         bible_version=[
             p_NRV1990[0],
             p_BLPH[0],
         ],
     )
 
-    palabras = ["ociosa"]
+    palabras = ["maligno"]
     result = seek.search_words(palabras)
     for i, df in enumerate(result):
         pprint.pprint(
