@@ -20,7 +20,7 @@ def execution_time(func):
 
 
 class Seek:
-    def __init__(self, is_remote, file_id, bible_version) -> None:
+    def __init__(self, is_remote: bool, file_id: list, bible_version: list) -> None:
         self.data = [
             DataBiblia(
                 is_remote=is_remote,
@@ -31,7 +31,7 @@ class Seek:
         ]
 
     @execution_time
-    def search_words(self, find_word):
+    def search_words(self, find_word: list) -> list:
         pattern = r"\b" + "|".join(find_word) + r"\b"  # Crear el patrón de búsqueda
         # Buscar las palabras en la biblia
         return [
@@ -60,16 +60,19 @@ if __name__ == "__main__":
     seek = Seek(
         is_remote=True,
         file_id=[
-            p_NRV1990[1],
             p_BLPH[1],
+            p_NRV1990[1],
         ],
         bible_version=[
-            p_NRV1990[0],
-            p_BLPH[0],
+            p_BLPH[1],
+            p_NRV1990[1],
         ],
     )
 
-    palabras = ["maligno"]
+    palabras = [
+        "Jesus",
+        "Cristo",
+    ]
     result = seek.search_words(palabras)
     for i, df in enumerate(result):
         pprint.pprint(
